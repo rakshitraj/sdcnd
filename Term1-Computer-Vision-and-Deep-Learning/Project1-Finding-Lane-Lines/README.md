@@ -10,27 +10,27 @@ The pipeline consisted of 5 major steps excluding reading and writing the image.
 
 Consider the test image given below:
 
-![Figure 1](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/blob/master/Term1-Computer-Vision-and-Deep-Learning/Project1-Finding-Lane-Lines/writeup_images/solidWhiteRight.jpg)
+![Figure 1](/writeup_images/solidWhiteRight.jpg)
 
 The test image is first converted to grayscale from RGB using the helper function grayscale(). This produces the below image.
 
-![Figure 2](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/blob/master/Term1-Computer-Vision-and-Deep-Learning/Project1-Finding-Lane-Lines/writeup_images/_gray_solidWhiteRight.jpg)
+![Figure 2](/writeup_images/_gray_solidWhiteRight.jpg)
 
 The grayscaled image is given a gaussian blur to remove noise or spurious gradients. The blurred image is given below.
 
-![Figure 3](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/blob/master/Term1-Computer-Vision-and-Deep-Learning/Project1-Finding-Lane-Lines/writeup_images/_blur_gray_solidWhiteRight.jpg)
+![Figure 3](/writeup_images/_blur_gray_solidWhiteRight.jpg)
 
 Canny edge detection is applied on this blurred image and a binary image shown below is produced.
 
-![Figure 4](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/blob/master/Term1-Computer-Vision-and-Deep-Learning/Project1-Finding-Lane-Lines/writeup_images/_edges_solidWhiteRight.jpg)
+![Figure 4](writeup_images/_edges_solidWhiteRight.jpg)
 
 This image contains edges that are not relevant for lane finding problem. A region of interest is defined to separate the lanes from sorrounding environment and a masked image containing only the lanes is extracted using cv2.bitwise_and() function from opencv library. This can be seen below.
 
-![Figure 5](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/blob/master/Term1-Computer-Vision-and-Deep-Learning/Project1-Finding-Lane-Lines/writeup_images/_masked_edges_solidWhiteRight.jpg)
+![Figure 5](/writeup_images/_masked_edges_solidWhiteRight.jpg)
 
 This binary image of identified lane lines is finally merged with the original image using cv2.addweighted() function from opencv library. This produces an image given below. Note that, this is without making any modifications to the drawlines() helper function. It can be observed that the lines are not continuous as required.
 
-![Figure 6](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/blob/master/Term1-Computer-Vision-and-Deep-Learning/Project1-Finding-Lane-Lines/writeup_images/_lines_edges_solidWhiteRight.jpg)
+![Figure 6](/writeup_images/_lines_edges_solidWhiteRight.jpg)
 
 ## Modification to drawlines() helper function
 Since the resulting line segments after the processing the image through the pipeline are not continuous, a modification is made to the drawlines() helper function. Consider the code snippet below:
@@ -73,19 +73,7 @@ def draw_lines_robust(img, lines, color=[200, 0, 0], thickness = 10):
 ```
 Observe that a classification of lines identified through houghlines criteria is made based on their slope. Evidently, lines with positive slope are classified as being on the left lane and lines with negative slope are classified as being on the right lane. Flat lines having slope below absolute value of 0.5 are discarded. After storing points for respective left and right lanes, a linear curve fit (degree 1) using polyfit() function from numpy library is done to obtain the slope and intercept of left and right lanes. Following this, x coordinates are found for respective y top and btm coordinates (user defined) using the lane equations for both lanes. This gives us starting and ending coordinates for both left and right lane. Finally, lines are drawn using cv2.line() function to connect these points and the image is merged with the original image as before to produce the below result.
 
-![Figure 7](https://github.com/vsingla2/Udacity-SDCND-Term1-P1/blob/master/writeup_images/_lines_edges_solidWhiteRight_draw_lines_modification.jpg)
-
-## Implementing the pipeline on test videos
-
-The pipeline developed in the project is implemented on 2 different test videos.
-
-1. The first test video consists of a solid white right lane and dashed white left lane. As it can be observed, the pipeline produces acceptable results for this case.
-
-[![Figure 8](http://i.imgur.com/xxYWezT.jpg)](https://www.youtube.com/watch?v=Td0nwyttV7g)
-
-2. The second test video consists of a solid yellow left lane and dashed white right lane. As it can be observed, the pipeline produces acceptable results for this case.
-
-[![Figure 8](http://i.imgur.com/StGtIIA.jpg)](https://youtu.be/vGnH1O8CUIE)
+![Figure 7](/writeup_images/_lines_edges_solidWhiteRight_draw_lines_modification.jpg)
 
 ## Shortcomings observed in the current pipeline
 

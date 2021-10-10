@@ -27,7 +27,7 @@ The goals of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/vsingla2/Self-Driving-Car-NanoDegree-Udacity/tree/master/Term1-Computer-Vision-and-Deep-Learning/Project2-Traffic-Sign-Classifier/Traffic_Sign_Classifier.ipynb)
+This document shall serve as writeup and here is a link to my [project code](https://github.com/rakshitraj/sdcnd/tree/main/Term1-Computer-Vision-and-Deep-Learning/Project2-Traffic-Sign-Classifier/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
